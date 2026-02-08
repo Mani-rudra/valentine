@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Be My Valentine 💘</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heart {
+  position: absolute;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  from { transform: translateY(100vh); opacity: 1; }
+  to { transform: translateY(-10vh); opacity: 0; }
+}
+
+.open-btn {
+  padding: 18px 36px;
+  font-size: 22px;
+  background: white;
+  color: #ff4d6d;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  justify-content: center;
+  align-items: center;
+}
+
+.box {
+  background: white;
+  padding: 30px;
+  border-radius: 25px;
+  text-align: center;
+  width: 90%;
+  max-width: 350px;
+}
+
+.buttons {
+  margin-top: 25px;
+  position: relative;
+  height: 80px;
+}
+
+button {
+  padding: 12px 28px;
+  border-radius: 25px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#yes {
+  background: #38b000;
+  color: white;
+}
+
+#no {
+  background: #d00000;
+  color: white;
+  position: absolute;
+  left: 120px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎵 Romantic Music -->
+<audio id="music" autoplay loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3">
+</audio>
+
+<button class="open-btn" onclick="openPopup()">
+  💌 Click here for Valentine
+</button>
+
+<div class="popup" id="popup">
+  <div class="box">
+    <!-- ✏️ CHANGE NAME HERE -->
+    <h2>Will you be my Valentine, <span style="color:#ff4d6d;"></span>? 💖</h2>
+    <p>No is not an option today 😏</p>
+
+    <div class="buttons" id="buttons">
+      <button id="yes" onclick="yesClicked()">Yes 😍</button>
+      <button id="no" onmouseover="moveNo()" ontouchstart="moveNo()"
+  ontouchstart="moveNo(event)"
+  onpointerdown="moveNo(event)">
+  No 😅
+</button>
+    </div>
+
+    <h3 id="result" style="display:none;color:#38b000;">
+      💍 Date Confirmed! 💕<br>
+      See you soon, Valentine 😘
+    </h3>
+
+    <!-- 📲 WhatsApp Share -->
+    <a id="share" style="display:none;" target="_blank">
+      📲 Share this moment on WhatsApp
+    </a>
+  </div>
+</div>
+
+<script>
+function openPopup() {
+  document.getElementById("popup").style.display = "flex";
+}
+
+function moveNo() {
+  const btn = document.getElementById("no");
+  btn.style.left = Math.random() * 200 + "px";
+  btn.style.top = Math.random() * 50 + "px";
+}
+
+function yesClicked() {
+  document.getElementById("buttons").style.display = "none";
+  document.getElementById("result").style.display = "block";
+
+  const msg = encodeURIComponent(
+    "I just said YES to being your Valentine 💖💍"
+  );
+  document.getElementById("share").href =
+    "https://wa.me/?text=" + msg;
+  document.getElementById("share").style.display = "block";
+
+  celebrate();
+}
+
+function celebrate() {
+  for (let i = 0; i < 30; i++) {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (16 + Math.random() * 20) + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }
+}
+</script>
+
+</body>
+</html>
